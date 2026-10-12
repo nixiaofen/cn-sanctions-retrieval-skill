@@ -15,6 +15,10 @@ match_names.py — 中国无接口清单「名称比对」辅助（归一化 + �
 
 仅做辅助标记，不自动定性"命中/未命中"——模糊项一律标"候选"。
 
+⚠️ 本脚本**只做名称字符串匹配**，不含任何主体身份信息（统一社会信用代码、注册号、
+注册地等），因此**无法识别同名主体**。输出只能作为**候选线索**；主体是否同一，
+必须由人工按 SOP 做身份交叉核验（至少两项辅助信息一致）后方可定性。
+
 用法：
     python match_names.py --names names.txt --list extracted.txt
     python match_names.py --names names.txt --list extracted.txt --out report.md
@@ -112,6 +116,7 @@ def main():
         lines.append(f"| {name} | {norm} | {status} | {note} |")
     lines.append("")
     lines.append("> 候选项须经人工终判（名称变体/简称），不得自动定性为命中。")
+    lines.append("> 本报告仅含名称匹配结果，**不含主体身份信息**；同名主体无法识别，须人工完成身份交叉核验后方可定性。")
     report = "\n".join(lines)
 
     print(report)
